@@ -1,4 +1,4 @@
-This is the Backend till now soon front-end will be made and uploaded to save repository
+Updated the project by adding frontend as-well-as changes in backend made
 
 React A popular JavaScript library for building dynamic and reusable user interfaces.
 Spring Boot: A powerful framework for creating RESTful APIs and microservices on the Java platform.
