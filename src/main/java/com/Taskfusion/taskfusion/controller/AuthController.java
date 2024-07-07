@@ -6,6 +6,7 @@ import com.Taskfusion.taskfusion.repository.UserRepository;
 import com.Taskfusion.taskfusion.request.LoginRequest;
 import com.Taskfusion.taskfusion.response.AuthResponse;
 import com.Taskfusion.taskfusion.service.CustomUserDetailsImp;
+import com.Taskfusion.taskfusion.service.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -33,6 +31,9 @@ public class AuthController {
     @Autowired
     private CustomUserDetailsImp customUserDetailsImp;
 
+    @Autowired
+    private SubscriptionService subscriptionService;
+
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws Exception {
         User isUserExist= userRepository.findByEmail((user.getEmail()));
@@ -46,6 +47,8 @@ public class AuthController {
         createdUser.setFullName(user.getFullName());
 
         User savedUser= userRepository.save(createdUser);
+
+        subscriptionService.createdSubscription(savedUser);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);

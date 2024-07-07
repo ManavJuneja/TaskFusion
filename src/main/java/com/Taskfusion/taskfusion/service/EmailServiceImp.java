@@ -21,7 +21,7 @@ public class EmailServiceImp implements EmailService{
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,"utf-8");
 
         String subject="Join Project Team Invitation";
-        String text="Click the link to join the project team"+link;
+        String text="Click the link to join the project team "+link;
 
         helper.setSubject(subject);
         helper.setText(text,true);

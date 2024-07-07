@@ -34,12 +34,12 @@ public class IssueServiceImp implements IssueService{
 
     @Override
     public List<Issue> getIssueByProjectId(Long projectId) throws Exception {
-        return issueRepository.findByProjectID(projectId);
+        return issueRepository.findByProjectId(projectId);
     }
 
     @Override
     public Issue createIssue(IssueRequest issueRequest, User user) throws Exception {
-        Project project= projectService.getProjectById(issueRequest.getProjectID());
+        Project project= projectService.getProjectById(issueRequest.getProjectId());
         Issue issue=new Issue();
         issue.setTitle(issueRequest.getTitle());
         issue.setDescription(issueRequest.getDescription());

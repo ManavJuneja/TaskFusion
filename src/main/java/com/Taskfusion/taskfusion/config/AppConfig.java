@@ -39,9 +39,12 @@ public class AppConfig {
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                 CorsConfiguration cfg = new CorsConfiguration();
                 cfg.setAllowedOrigins(Arrays.asList(
+
                         "http://localhost:3000",
                         "http://localhost:5173",
-                        "http://localhost:4200"
+                        "https://task-fusion-kappa",
+                        "https://task-fusion-kappa.vercel.app"
+
                 ));
                 cfg.setAllowedMethods(Collections.singletonList("*"));
                 cfg.setAllowCredentials(true);
@@ -50,7 +53,7 @@ public class AppConfig {
                 cfg.setMaxAge(3600L);
 
 
-                return null;
+                return cfg;
             }
         };
 
